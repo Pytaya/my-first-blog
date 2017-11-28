@@ -59,3 +59,19 @@ h1, h2, h3, h4 {
 .comment {
     margin: 20px 0px 20px 20px;
 }
+/* start page css */
+#Pageing A{
+    background-color: #008844;
+    border:1px solid white;
+    text-decoration: none;
+    color: white;
+    padding: .1em .6em .2em .6em;
+}
+#Pageing A.selected{
+    background-color: #AA7700;
+}
+#Pageing A.invalid{
+    pointer-events: none;
+    background-color: #babfbc;
+}
+/* end page css */

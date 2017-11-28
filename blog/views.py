@@ -1,13 +1,42 @@
-from django.shortcuts import render, get_object_or_404,redirect
+from django.shortcuts import render, get_object_or_404,redirect, render_to_response
 from .models import Post, Comment
 from django.utils import timezone
 from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
+from .pagin_class import PageClass
 
 # Create your views here.
-def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'blog/post_list.html', {'posts': posts})
+def post_list(request, current_page=1):
+    # posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    # return render(request, 'blog/post_list.html', {'posts': posts})
+    
+    current_page = int(current_page)
+    # per_item = 3  # 每页条数
+    per_item = int(request.COOKIES.get('pager_num',3))
+    
+    show_page_cout = 5  # 想要展示的页数
+    
+    # PageClass参数: app_name  models.class_name  current_page
+    pageclass = PageClass('blog','Post',current_page)
+    result,count,all_page_count = pageclass.data_DataCount_AllPageCount(per_item)
+    page_list = pageclass.pageList(all_page_count,show_page_cout)
+    pre_page,nex_page = pageclass.prePage_NexPage(all_page_count)
+    
+    if current_page > all_page_count:
+        return redirect('post_list', current_page=all_page_count)
+    ret = {
+    'posts':result,
+    # 'count':count,
+    'page_list':page_list,
+    'last_page':all_page_count,
+    'pre_page':pre_page,
+    'nex_page':nex_page,
+    'current_page':current_page,
+    }
+    
+    response = render_to_response('blog/post_list.html',ret)
+    return response
+
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
