@@ -1,4 +1,5 @@
 #coding:utf-8
+from django.utils import timezone
 import sys
 class PageClass():
     def __init__(self,app_name,db_table,current_page):
@@ -9,7 +10,8 @@ class PageClass():
     def data_DataCount_AllPageCount(self,per_item=5):
         start = (self.current_page - 1) * per_item  # 得到数据库中每页开始的索引
         end = self.current_page * per_item  # 得到数据库中每页最后的索引,不包含
-        all_result = self.tabel.objects.all().order_by('-id')  # 所有数据
+        # all_result = self.tabel.objects.all().order_by('-id')  # 所有数据
+        all_result = self.tabel.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
         result = all_result[start:end]  # 返回指定范围数据
         count = all_result.count()  # 总数据条数
         temp = divmod(count, per_item)  # temp[0]:商 ；temp[1]:余数
@@ -17,6 +19,11 @@ class PageClass():
             all_page_count = temp[0]
         else:
             all_page_count = temp[0] + 1
+        
+        # 只返回text内容的前30字
+        for item in result:
+            item.text = item.text[:30]
+            item.text = item.text.strip().replace(' ', '').replace('\t', '').replace('\r', '').strip()
         return result,count,all_page_count
     
     def pageList(self,all_page_count,show_page_cout=5):

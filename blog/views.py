@@ -4,6 +4,9 @@ from django.utils import timezone
 from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from .pagin_class import PageClass
+from markdown2 import markdown
+from django.utils.encoding import force_text
+# from django.utils.safestring import mark_safe
 
 # Create your views here.
 def post_list(request, current_page=1):
@@ -34,12 +37,18 @@ def post_list(request, current_page=1):
     'current_page':current_page,
     }
     
-    response = render_to_response('blog/post_list.html',ret)
+    response = render(request, 'blog/post_list.html',ret)
     return response
 
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    # post.text = mark_safe(markdown(post.text))
+    txt = ""
+    for line in post.text.strip().split("\r\n"):
+        txt += line +"  \r\n"
+    post.text = markdown(force_text(txt),
+                        extras=["fenced-code-blocks", "cuddled-lists", "metadata", "tables", "spoiler",],)
     return render(request, 'blog/post_detail.html', {'post': post})
 
 @login_required

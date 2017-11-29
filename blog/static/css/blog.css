@@ -8,10 +8,10 @@ body {
     }
 
 .page-header {
-        /* background-color: #ff9400; */
         background-color: #4BC9C9;
         margin-top: 0;
-        padding: 20px 20px 20px 40px;
+        /* padding: 20px 20px 20px 40px; */
+        padding: 20px 20px 20px 126px;
     }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
@@ -21,7 +21,8 @@ body {
     }
 
 .content {
-        margin-left: 40px;
+        /* margin-left: 40px; */
+        margin-left: 158px;
     }
 
 h1, h2, h3, h4 {
@@ -60,6 +61,10 @@ h1, h2, h3, h4 {
     margin: 20px 0px 20px 20px;
 }
 /* start page css */
+#Pageing {
+    position:fixed;
+    bottom:10px;
+}
 #Pageing A{
     background-color: #008844;
     border:1px solid white;

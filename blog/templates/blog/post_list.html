@@ -61,6 +61,8 @@
             //创建或者修改cookies的值
             var value = $(arg).val();
             $.cookie('pager_num', value, {path:'/'})
+            var current_url = window.location.href;
+            self.location = current_url;
         }
     </script>
 {% endblock %}
