@@ -5,7 +5,7 @@
         <div style="float: right;">
             {% if post.published_date %}
                 <div class="date">
-                    {{ post.published_date }}
+                    {{ post.published_date |date:"Y-m-d H:m" }}
                 </div>
             {% else %}
                 <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
