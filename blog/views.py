@@ -7,6 +7,7 @@ from .pagin_class import PageClass
 from markdown2 import markdown
 from django.utils.encoding import force_text
 # from django.utils.safestring import mark_safe
+# import json
 
 # Create your views here.
 def post_list(request, current_page=1):

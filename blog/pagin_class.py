@@ -19,11 +19,12 @@ class PageClass():
             all_page_count = temp[0]
         else:
             all_page_count = temp[0] + 1
-        
+        '''
         # 只返回text内容的前30字
         for item in result:
             item.text = item.text[:30]
             item.text = item.text.strip().replace(' ', '').replace('\t', '').replace('\r', '').strip()
+        '''
         return result,count,all_page_count
     
     def pageList(self,all_page_count,show_page_cout=5):

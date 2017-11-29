@@ -14,8 +14,8 @@
             <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
         </div>
         <h1>{{ post.title }}</h1>
-        <!-- <p>{{ post.text|linebreaksbr }}</p> -->
-        <p>{{ post.text | safe }}
+        <!-- <p> post.text|linebreaksbr (这里删除了两个花括号)</p> -->
+        <p>{{ post.text | safe }}</p>
     </div>
     
     <hr>
