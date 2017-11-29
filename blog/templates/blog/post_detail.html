@@ -15,7 +15,11 @@
         </div>
         <h1>{{ post.title }}</h1>
         <!-- <p> post.text|linebreaksbr (这里删除了两个花括号)</p> -->
-        <p>{{ post.text | safe }}</p>
+        <!-- <p> post.text | safe </p> -->
+        <p id="show_md"></p>
+        <script>
+            $("#show_md").html(marked({{ post.text |safe}} ))
+        </script>
     </div>
     
     <hr>
