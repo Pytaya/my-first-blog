@@ -11,18 +11,20 @@
     
     <script>
         $(function(){
+            $("#full_or_half").css('width',"")
+            $("#row_left").css("width","100%")
+            $("#row_right").css("width","100%")
             $("#row_left").attr("class","col-sm-6 col-lg-6 col-md-6");
             $("#row_right").attr("class","col-sm-6 col-lg-6 col-md-6");
             $("#id_text").markdown({
-                height:300,
+                height:500,
                 onshow: function(){
                 }
             } )
         })
-        $("form").submit(function(){
-            $("#row_left").attr("class", "col-md-8");
-            $("#row_right").removeClass("col-sm-6 col-lg-6 col-md-6");
-        })
+        //$("form").submit(function(){
+            //$("#row_left").attr("class", "col-md-8");
+            //$("#row_right").removeClass("col-sm-6 col-lg-6 col-md-6");})
         $("#id_text").on("keyup blur focus", function(){
             $("#row_right").html(marked($("#id_text").val() ))
         })
