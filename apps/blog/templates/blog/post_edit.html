@@ -1,0 +1,34 @@
+{% extends 'blog/base_empty_body.html' %}
+
+{% block subheader %}
+    <span class="separator">&#x2F;</span>
+    <a href="#">文章编辑</a>
+{% endblock %}
+
+{% block content %}
+    <h1>New post</h1>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <!-- <textarea name="text" cols="40" rows="10" id="id_text" required=""></textarea> -->
+        <button type="submit" class="save btn btn-default">保存</button>
+    </form>
+    
+    <script>
+        $(function(){
+            $("#row_left").attr("class","col-sm-6 col-lg-6 col-md-6");
+            $("#row_right").attr("class","col-sm-6 col-lg-6 col-md-6");
+            $("#id_text").markdown({
+                height:500,
+                onshow: function(){
+                }
+            } )
+        });
+        //$("form").submit(function(){
+            //$("#row_left").attr("class", "col-md-8");
+            //$("#row_right").removeClass("col-sm-6 col-lg-6 col-md-6");})
+        $("#id_text").on("keyup blur focus", function(){
+            $("#row_right").html(marked($("#id_text").val() ))
+        })
+    </script>
+{% endblock %}

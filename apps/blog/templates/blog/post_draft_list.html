@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% load simple_and_filter_tag %}
+
+{% block subheader %}
+    <span class="separator">&#x2F;</span>
+    <a href="#">草稿箱</a>
+{% endblock %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <p class="date">created: {{ post.created_date|date:'d-m-Y' }}</p>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+{#            <p>{{ post.text|truncatechars:200 }}</p>#}
+            <p>{{ post.text | only_text:100 | linebreaksbr }}</p>
+        </div>
+        <HR width="100%" color=#987cb9>
+    {% endfor %}
+{% endblock %}

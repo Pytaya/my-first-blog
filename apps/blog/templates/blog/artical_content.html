@@ -1,0 +1,23 @@
+{% load staticfiles %}
+{% load simple_and_filter_tag %}
+<header>
+<img src="{% static 'img/1.jpg' %}" alt="">
+<h3><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title | cut_pre_content:30 }}</a></h3>
+<span class="meta">{{ post.published_date |date:"Y-m-d H:m"  }}</span>
+<hr>
+</header>
+{#<div class="body" id="artical_content_{{ forloop.counter0 }}">#}
+<div class="body">
+{#    {{ post.text | linebreaksbr| truncatechars_html:50  }}#}
+    <p>{{ post.text | only_text:100 | linebreaksbr}}</p>
+</div>
+<div class="clearfix">
+<a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-clean-one">Read more</a>
+</div>
+{#<script>#}
+{#    $(function(){#}
+{#        var txt = "{{ post.text | linebreaksbr| truncatechars_html:50  }}";#}
+{#            console.log(txt);#}
+{#        $("#artical_content_{{ forloop.counter0 }}").html(marked(txt))#}
+{#    })#}
+{#</script>#}
